@@ -19,6 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const NewsRoutes = require("./src/routes/news");
 app.use("/", NewsRoutes);
 app.use("/article", NewsRoutes);
-
+app.use("/menu_list", NewsRoutes);
 //listen port
 app.listen(port, () => console.log(`Listening on port ${port}`));

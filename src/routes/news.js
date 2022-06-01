@@ -55,4 +55,29 @@ NewsRoutes.get("/:id", async (req, res) => {
   }
 });
 
+NewsRoutes.get("", async (req, res) => {
+  try {
+    const menuApi = await axios.get(
+      `https://css-tricks.com/wp-json/wp/v2/types/nav_menu_item`
+    );
+    res.render("MenuList", { menu_list: menuApi.data });
+  } catch (err) {
+    if (err.response) {
+      res.render("MenuList", { menu_list: null });
+
+      console.log(err.response.data);
+      console.log(err.response.status);
+      console.log(err.response.headers);
+    } else if (err.request) {
+      res.render("MenuList", { menu_list: null });
+
+      console.log(err.requiest);
+    } else {
+      res.render("MenuList", { menu_list: null });
+
+      console.error("MenuList", err.message);
+    }
+  }
+});
+
 module.exports = NewsRoutes;
